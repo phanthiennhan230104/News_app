@@ -1,0 +1,30 @@
+{% extends "core/base.html" %}
+{% block title %}Tin theo danh mục: {{ category.name }}{% endblock %}
+
+{% block content %}
+<div class="container">
+  <h1>Danh mục: {{ category.name }}</h1>
+
+  <div class="news-grid">
+    {% for a in articles %}
+      <div class="news-card">
+        <a href="{% url 'article_detail' a.id %}" class="news-title">{{ a.title }}</a>
+        <p class="news-description">{{ a.short_desc|truncatewords:25 }}</p>
+        <div class="news-meta">
+          <span>{{ a.published_at|date:"d/m/Y H:i" }}</span>
+          <span class="news-category">{{ category.name }}</span>
+        </div>
+      </div>
+    {% empty %}
+      <p>Không có tin trong danh mục này.</p>
+    {% endfor %}
+  </div>
+
+  <div class="pagination">
+    {% if page|add:'-1' > 0 %}
+      <a href="?page={{ page|add:'-1' }}" class="btn">← Trang trước</a>
+    {% endif %}
+    <a href="?page={{ page|add:'1' }}" class="btn">Trang sau →</a>
+  </div>
+</div>
+{% endblock %}

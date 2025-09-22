@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Quản lý hệ thống</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'authentication/css/superuser_home.css' %}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lucide/0.263.1/umd/lucide.js"></script>
+</head>
+<body>
+    <div class="admin-container">
+        <!-- Header -->
+        <div class="header">
+            <h1>Xin chào, {{ request.user.username }}</h1>
+            <p>Chào mừng bạn đến với bảng điều khiển quản lý</p>
+            <div style="margin-top:1rem;">
+              <a href="{% url 'home' %}" class="btn">🌐 Xem website</a>   {# 👈 nút quay lại web #}
+            </div>
+        </div>
+
+        <!-- Content -->
+        <div class="content">
+            <!-- Quản lý tài khoản -->
+            <div class="section">
+                <div class="section-header">
+                    <h2 class="section-title">
+                        <i data-lucide="users"></i>
+                        Quản lý tài khoản
+                    </h2>
+                    <button class="btn btn-primary" onclick="location.href='{% url 'user_create' %}'">
+                        <i data-lucide="user-plus"></i>
+                        Thêm tài khoản mới
+                    </button>
+                </div>
+
+                <div class="table-container">
+                    <div class="table-responsive">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Tên đăng nhập</th>
+                                    <th>Email</th>
+                                    <th>Superuser</th>
+                                    <th>Nhóm</th>
+                                    <th>Hành động</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for user in users %}
+                                <tr>
+                                    <td>{{ user.id }}</td>
+                                    <td>{{ user.username }}</td>
+                                    <td>{{ user.email }}</td>
+                                    <td>{% if user.is_superuser %}✅{% else %}❌{% endif %}</td>
+                                    <td>
+                                        {% for g in user.groups.all %}
+                                            {{ g.name }}{% if not forloop.last %}, {% endif %}
+                                        {% empty %}
+                                            -
+                                        {% endfor %}
+                                    </td>
+                                    <td>
+                                        <a href="{% url 'user_update' user.id %}" class="btn btn-edit">Sửa</a>
+                                        <a href="{% url 'user_delete' user.id %}" class="btn btn-delete">Xoá</a>
+                                    </td>
+                                </tr>
+                                {% empty %}
+                                <tr>
+                                    <td colspan="6" class="empty-message">
+                                        <i data-lucide="users" class="empty-icon"></i>
+                                        <div class="empty-title">Chưa có tài khoản nào.</div>
+                                        <div class="empty-text">Bắt đầu bằng cách thêm tài khoản đầu tiên của bạn.</div>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Phân quyền / Nhóm -->
+            <div class="section groups-section">
+                <div class="section-header">
+                    <h2 class="section-title">
+                        <i data-lucide="shield"></i>
+                        Phân quyền / Nhóm
+                    </h2>
+                    <button class="btn btn-primary" onclick="location.href='{% url 'group_create' %}'">
+                        <i data-lucide="plus"></i>
+                        Tạo nhóm mới
+                    </button>
+                </div>
+
+                <div class="table-container">
+                    <div class="table-responsive">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Tên nhóm</th>
+                                    <th>Quyền</th>
+                                    <th>Hành động</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for group in groups %}
+                                <tr>
+                                    <td>{{ group.id }}</td>
+                                    <td>{{ group.name }}</td>
+                                    <td>
+                                        {% for perm in group.permissions.all %}
+                                            {{ perm.name }}{% if not forloop.last %}, {% endif %}
+                                        {% empty %}
+                                            -
+                                        {% endfor %}
+                                    </td>
+                                    <td>
+                                        <a href="{% url 'group_update' group.id %}" class="btn btn-edit">Sửa</a>
+                                        <a href="{% url 'group_delete' group.id %}" class="btn btn-delete">Xoá</a>
+                                    </td>
+                                </tr>
+                                {% empty %}
+                                <tr>
+                                    <td colspan="4" class="empty-message">
+                                        <i data-lucide="shield" class="empty-icon"></i>
+                                        <div class="empty-title">Chưa có nhóm nào.</div>
+                                        <div class="empty-text">Tạo nhóm quyền để quản lý phân quyền người dùng.</div>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quản lý chuyên mục -->
+            <div class="section categories-section">
+                <div class="section-header">
+                    <h2 class="section-title">
+                        <i data-lucide="folder"></i>
+                        Quản lý chuyên mục
+                    </h2>
+                    <button class="btn btn-primary" onclick="location.href='{% url 'category_create' %}'">
+                        <i data-lucide="plus"></i>
+                        Thêm chuyên mục mới
+                    </button>
+                </div>
+
+                <div class="table-container">
+                    <div class="table-responsive">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Tên chuyên mục</th>
+                                    <th>Slug</th>
+                                    <th>Mô tả</th>
+                                    <th>Hành động</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for cat in categories %}
+                                <tr>
+                                    <td>{{ cat.id }}</td>
+                                    <td>{{ cat.name }}</td>
+                                    <td>{{ cat.slug }}</td>
+                                    <td>{{ cat.description|default:"-" }}</td>
+                                    <td>
+                                        <a href="{% url 'category_update' cat.id %}" class="btn btn-edit">Sửa</a>
+                                        <a href="{% url 'category_delete' cat.id %}" class="btn btn-delete">Xoá</a>
+                                    </td>
+                                </tr>
+                                {% empty %}
+                                <tr>
+                                    <td colspan="5" class="empty-message">
+                                        <i data-lucide="folder" class="empty-icon"></i>
+                                        <div class="empty-title">Chưa có chuyên mục nào.</div>
+                                        <div class="empty-text">Bắt đầu bằng cách thêm chuyên mục đầu tiên của bạn.</div>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>{% if mode == "create" %}Tạo tài khoản{% else %}Sửa tài khoản{% endif %}</title>
+  <link rel="stylesheet" href="{% static 'authentication/css/superuser_home.css' %}">
+</head>
+<body>
+<div class="admin-container">
+  <div class="header">
+    <h1>{% if mode == "create" %}Tạo tài khoản mới{% else %}Sửa tài khoản: {{ obj.username }}{% endif %}</h1>
+    <p>Quản lý tài khoản người dùng</p>
+  </div>
+
+  <div class="content">
+    <div class="section">
+      <div class="table-container" style="padding:2rem;">
+        <form method="post">
+          {% csrf_token %}
+          <div class="form-grid">
+            <label>Tên đăng nhập</label>{{ form.username }}
+            <label>Email</label>{{ form.email }}
+            <label>Nhóm (Giữ Ctrl/Cmd để chọn nhiều)</label>{{ form.groups }}
+            <label>Hoạt động</label>{{ form.is_active }}
+            <label>Nhân viên (is_staff)</label>{{ form.is_staff }}
+            <label>Superuser</label>{{ form.is_superuser }}
+            <label>Mật khẩu</label>{{ form.password }}
+            <label>Xác nhận mật khẩu</label>{{ form.password_confirm }}
+          </div>
+          <div style="margin-top:1.5rem; display:flex; gap:.5rem;">
+            <button class="btn btn-primary" type="submit">Lưu</button>
+            <a href="{% url 'superuser_home' %}" class="btn">Hủy</a>
+          </div>
+          {% if form.errors %}
+          <div class="empty-message" style="margin-top:1rem;">
+            <div class="empty-title">Có lỗi xảy ra</div>
+            <div class="empty-text">{{ form.errors }}</div>
+          </div>
+          {% endif %}
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

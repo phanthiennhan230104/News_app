@@ -1,0 +1,103 @@
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Căn giữa toàn màn hình */
+body {
+    font-family: "Segoe UI", Tahoma, sans-serif;
+    background: linear-gradient(135deg, #e9f0ff, #f8f9fa);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+/* Box đăng nhập */
+.auth-box {
+    background: #fff;
+    padding: 2.5rem 2rem;
+    border-radius: 16px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+    width: 360px;
+    max-width: 95%;
+    text-align: center;
+    animation: fadeIn 0.4s ease;
+}
+
+/* Tiêu đề */
+.auth-box h2 {
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+    color: #007bff;
+}
+
+/* Input */
+.form-group {
+    margin-bottom: 1rem;
+}
+input {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid #ced4da;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+input:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(0,123,255,0.15);
+}
+
+/* Nút */
+.btn {
+    display: block;
+    width: 100%;
+    padding: 0.9rem;
+    font-size: 1rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.2s ease;
+    margin-top: 0.5rem;
+    text-decoration: none;
+}
+
+/* Nút login */
+.btn-login {
+    background: #007bff;
+    color: #fff;
+}
+.btn-login:hover {
+    background: #0056b3;
+}
+
+/* Nút register */
+.btn-register {
+    background: #28a745;
+    color: #fff;
+}
+.btn-register:hover {
+    background: #218838;
+}
+
+/* Thông báo lỗi */
+.error {
+    color: #dc3545;
+    background: #f8d7da;
+    border: 1px solid #f5c2c7;
+    padding: 0.6rem;
+    border-radius: 6px;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+}
+
+/* Hiệu ứng */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to   { opacity: 1; transform: translateY(0); }
+}

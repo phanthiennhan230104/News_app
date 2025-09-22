@@ -1,0 +1,37 @@
+{% extends "core/base.html" %}
+{% block title %}
+  {% if category_mode %}
+    Xóa chuyên mục: {{ cat.name }}
+  {% else %}
+    Xóa bài: {{ a.title }}
+  {% endif %}
+{% endblock %}
+
+{% block content %}
+<div class="container">
+  <div class="form-container">
+    <h2 style="margin-bottom: 1.5rem; color: #dc3545;">⚠️ Xác nhận xoá</h2>
+
+    {% if category_mode %}
+      <p style="margin-bottom: 2rem;">
+        Bạn có chắc chắn muốn xoá chuyên mục: <strong>"{{ cat.name }}"</strong> không?
+      </p>
+    {% else %}
+      <p style="margin-bottom: 2rem;">
+        Bạn có chắc chắn muốn xoá bài viết: <strong>"{{ a.title }}"</strong> không?
+      </p>
+    {% endif %}
+
+    <form method="post" style="display:flex; gap: 1rem;">
+      {% csrf_token %}
+      <button type="submit" class="btn" style="background: #dc3545;">🗑️ Xoá</button>
+
+      {% if category_mode %}
+        <a href="{% url 'superuser_home' %}" class="btn" style="background: #6c757d;">❌ Hủy</a>
+      {% else %}
+        <a href="{% url 'my_articles' %}" class="btn" style="background: #6c757d;">❌ Hủy</a>
+      {% endif %}
+    </form>
+  </div>
+</div>
+{% endblock %}

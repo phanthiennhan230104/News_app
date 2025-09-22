@@ -1,0 +1,88 @@
+{% extends "core/base.html" %}
+{% block title %}
+  {% if category_mode %}
+    {% if cat %}Sửa chuyên mục{% else %}Thêm chuyên mục{% endif %}
+  {% else %}
+    {% if a %}Sửa bài{% else %}Đăng tin{% endif %}
+  {% endif %}
+{% endblock %}
+
+{% block content %}
+<div class="container">
+  <div class="form-container">
+
+    {% if category_mode %}
+      <h2 style="margin-bottom: 2rem; color: #007bff;">
+        {% if cat %}✏️ Sửa chuyên mục{% else %}📝 Thêm chuyên mục{% endif %}
+      </h2>
+
+      <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+          <label for="title">Tên chuyên mục</label>
+          <input type="text" id="title" name="title" value="{{ cat.name|default:'' }}" required>
+        </div>
+
+        <div class="form-group">
+          <label for="short_desc">Slug</label>
+          <input type="text" id="short_desc" name="short_desc" value="{{ cat.slug|default:'' }}" required>
+        </div>
+
+        <div class="form-group">
+          <label for="content">Mô tả</label>
+          <textarea id="content" name="content" rows="5">{{ cat.description|default:'' }}</textarea>
+        </div>
+
+        <div style="display:flex; gap:1rem;">
+          <button type="submit" class="btn">💾 Lưu</button>
+          <a href="{% url 'superuser_home' %}" class="btn" style="background:#6c757d;">❌ Hủy</a>
+        </div>
+      </form>
+
+    {% else %}
+      <h2 style="margin-bottom: 2rem; color: #007bff;">
+        {% if a %}✏️ Sửa bài{% else %}📝 Đăng tin mới{% endif %}
+      </h2>
+
+      <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+          <label for="title">Tiêu đề</label>
+          <input type="text" id="title" name="title" value="{{ a.title|default:'' }}" required>
+        </div>
+
+        <div class="form-group">
+          <label for="short_desc">Mô tả ngắn</label>
+          <input type="text" id="short_desc" name="short_desc" value="{{ a.short_desc|default:'' }}" maxlength="500" required>
+        </div>
+
+        <div class="form-group">
+          <label for="content">Nội dung</label>
+          <textarea id="content" name="content" rows="10" required>{{ a.content|default:'' }}</textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="category_id">Danh mục</label>
+          <select id="category_id" name="category_id" required>
+            {% for c in categories %}
+              <option value="{{ c.id }}" {% if a and a.category_id == c.id %}selected{% endif %}>{{ c.name }}</option>
+            {% endfor %}
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="published_at">Ngày đăng</label>
+          <input type="datetime-local" id="published_at" name="published_at"
+                 value="{% if a %}{{ a.published_at|date:'Y-m-d\\TH:i' }}{% endif %}">
+        </div>
+
+        <div style="display:flex; gap:1rem;">
+          <button type="submit" class="btn">💾 Lưu</button>
+          <a href="{% url 'my_articles' %}" class="btn" style="background:#6c757d;">❌ Hủy</a>
+        </div>
+      </form>
+    {% endif %}
+
+  </div>
+</div>
+{% endblock %}

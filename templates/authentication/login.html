@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    {% load static %}
+    <title>Đăng nhập</title>
+    <link rel="stylesheet" href="{% static 'authentication/css/login.css' %}">
+</head>
+<body>
+    <div class="auth-box">
+        <h2>🔑 Đăng nhập</h2>
+
+        {% if messages %}
+            {% for message in messages %}
+                <div class="error">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <input type="text" name="username" placeholder="Tên đăng nhập" required>
+            </div>
+            <div class="form-group">
+                <input type="password" name="password" placeholder="Mật khẩu" required>
+            </div>
+            <button type="submit" class="btn btn-login">Đăng nhập</button>
+        </form>
+
+        <a href="{% url 'register' %}" class="btn btn-register">Tạo tài khoản mới</a>
+    </div>
+</body>
+</html>

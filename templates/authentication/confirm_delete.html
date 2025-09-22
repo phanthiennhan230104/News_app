@@ -1,0 +1,29 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>{{ title }}</title>
+  <link rel="stylesheet" href="{% static 'authentication/css/superuser_home.css' %}">
+</head>
+<body>
+<div class="admin-container">
+  <div class="header">
+    <h1>{{ title }}</h1>
+    <p>Thao tác không thể hoàn tác</p>
+  </div>
+  <div class="content">
+    <div class="section">
+      <div class="table-container" style="padding:2rem; text-align:center;">
+        <p>Bạn chắc chắn muốn xoá: <strong>{{ object_name }}</strong> ?</p>
+        <form method="post" style="margin-top:1rem;">
+          {% csrf_token %}
+          <button class="btn btn-delete" type="submit">Xoá</button>
+          <a class="btn" href="{{ cancel_url }}">Hủy</a>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

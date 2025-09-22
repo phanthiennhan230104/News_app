@@ -1,0 +1,51 @@
+{% load static crispy_forms_tags %}
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Đăng ký</title>
+    <link rel="stylesheet" href="{% static 'authentication/css/register.css' %}">
+</head>
+<body>
+    <div class="auth-box">
+        <h2>📝 Đăng ký</h2>
+
+        {% if form.errors %}
+            <div class="error">
+                Vui lòng kiểm tra lại thông tin đã nhập.
+            </div>
+        {% endif %}
+
+        <form method="post">
+            {% csrf_token %}
+
+            <div class="form-group">
+                {{ form.username.label_tag }}
+                {{ form.username }}
+            </div>
+
+            <div class="form-group">
+                {{ form.email.label_tag }}
+                {{ form.email }}
+            </div>
+
+            <div class="form-group">
+                {{ form.password1.label_tag }}
+                {{ form.password1 }}
+            </div>
+
+            <div class="form-group">
+                {{ form.password2.label_tag }}
+                {{ form.password2 }}
+            </div>
+
+            <button type="submit" class="btn btn-register">Tạo tài khoản</button>
+        </form>
+
+        <p style="margin-top:1rem;">
+            Đã có tài khoản? 
+            <a href="{% url 'login' %}">Đăng nhập</a>
+        </p>
+    </div>
+</body>
+</html>

@@ -1,0 +1,55 @@
+{% load static %}
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <title>{% block title %}Tin Tức 24h{% endblock %}</title>
+  <link rel="stylesheet" href="{% static 'core/css/style.css' %}">
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="navbar-container">
+      <!-- Logo -->
+      <a href="/" class="logo">📰 Tin Tức 24h</a>
+
+      <!-- Links ở giữa -->
+      <div class="nav-links">
+        <a href="/">Trang chủ</a>
+        {% if user.is_authenticated %}
+          {% if can_post %}
+            <a href="{% url 'my_articles' %}">Bài của tôi</a>
+          {% endif %}
+          {% if user.is_superuser %}
+            <a href="{% url 'superuser_home' %}">Trang quản trị</a>
+          {% endif %}
+        {% endif %}
+      </div>
+
+      <!-- Search + Login/Logout bên phải -->
+      <div class="nav-actions">
+        <div class="search-box">
+          <form action="/" method="get">
+            <input type="text" name="q" value="{{ q|default:'' }}" placeholder="Tìm kiếm tin tức...">
+          </form>
+        </div>
+
+        {% if user.is_authenticated %}
+          <span class="welcome-text">Xin chào <strong>{{ user.username }}</strong></span>
+          <a href="{% url 'logout' %}" class="btn btn-logout">🚪 Đăng xuất</a>
+        {% else %}
+          <a href="{% url 'login' %}" class="btn btn-login">🔑 Đăng nhập</a>
+        {% endif %}
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+    {% for m in messages %}
+      <div class="flash-message">{{ m }}</div>
+    {% endfor %}
+
+    {% block content %}{% endblock %}
+  </div>
+</body>
+</html>

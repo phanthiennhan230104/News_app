@@ -1,0 +1,173 @@
+/* Tổng thể */
+:root {
+  color-scheme: light !important;
+}
+body, #container {
+  background: #ffffff !important;
+  color: #212529 !important;
+  font-family: "Segoe UI", Tahoma, sans-serif !important;
+  line-height: 1.6 !important;
+}
+
+/* Header (đồng bộ với core) */
+#header {
+  background: linear-gradient(135deg, #007bff 0%, #0056b3 100%) !important;
+  color: #fff !important;
+  border: none !important;
+  padding: 1rem 2rem !important;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+#header h1, #header h1 a {
+  color: #fff !important;
+  font-size: 1.25rem !important;
+  font-weight: 700 !important;
+  text-decoration: none !important;
+}
+#user-tools {
+  color: #fff !important;
+}
+#user-tools a {
+  color: #fff !important;
+  text-decoration: none !important;
+}
+#user-tools a:hover {
+  text-decoration: underline !important;
+}
+
+/* Sidebar */
+#nav-sidebar {
+  background: #f8f9fa !important;
+  border-right: 1px solid #dee2e6 !important;
+}
+#nav-sidebar h2 {
+  font-size: 0.9rem !important;
+  font-weight: 600 !important;
+  color: #495057 !important;
+}
+#nav-sidebar a {
+  color: #007bff !important;
+  text-decoration: none !important;
+}
+#nav-sidebar a:hover {
+  text-decoration: underline !important;
+}
+
+/* Module (box) */
+.module {
+  background: #ffffff !important;
+  border: 1px solid #dee2e6 !important;
+  border-radius: 6px !important;
+  margin-bottom: 1rem !important;
+}
+.module caption {
+  background: #f1f3f5 !important;
+  color: #212529 !important;
+  font-weight: 600 !important;
+  padding: 0.5rem 1rem !important;
+  text-align: left !important;
+}
+
+/* Bảng danh sách */
+#changelist-form table {
+  background: #ffffff !important;
+  border-collapse: collapse !important;
+  width: 100% !important;
+}
+#changelist-form thead th {
+  background: #f8f9fa !important;
+  color: #212529 !important;
+  font-weight: 600 !important;
+  padding: 0.6rem !important;
+  border-bottom: 2px solid #dee2e6 !important;
+}
+#changelist-form tbody td {
+  padding: 0.6rem !important;
+  border-bottom: 1px solid #e9ecef !important;
+  color: #212529 !important;
+}
+#changelist-form tbody tr:nth-child(even) {
+  background: #f8f9fa !important;
+}
+#changelist-form tbody tr:hover {
+  background: #e9ecef !important;
+}
+
+/* Form inputs */
+input, select, textarea {
+  border: 1px solid #ced4da !important;
+  border-radius: 4px !important;
+  padding: 0.5rem !important;
+  font-size: 0.9rem !important;
+  color: #212529 !important;
+  background: #ffffff !important;
+}
+input:focus, select:focus, textarea:focus {
+  border-color: #007bff !important;
+  box-shadow: 0 0 0 2px rgba(0,123,255,0.25) !important;
+}
+
+/* Buttons */
+.button, input[type=submit], .submit-row input, .btn, .button.default {
+  background: #007bff !important;
+  color: #fff !important;
+  border: none !important;
+  border-radius: 4px !important;
+  padding: 0.4rem 1rem !important;
+  cursor: pointer !important;
+}
+.button:hover, input[type=submit]:hover, .submit-row input:hover {
+  background: #0056b3 !important;
+}
+/* Changelist (list view) */
+
+/* Search bar */
+#changelist-search,
+#changelist-search div,
+#changelist-search input {
+  background: #ffffff !important;
+  color: #212529 !important;
+}
+#changelist-search {
+  border: 1px solid #dee2e6 !important;
+  padding: 0.5rem !important;
+  border-radius: 6px !important;
+}
+
+/* Action bar (hành động) */
+#changelist .actions {
+  background: #f8f9fa !important;
+  border: 1px solid #dee2e6 !important;
+  padding: 0.5rem !important;
+  border-radius: 6px !important;
+  color: #212529 !important;
+}
+#changelist .actions select,
+#changelist .actions button {
+  background: #ffffff !important;
+  color: #212529 !important;
+  border: 1px solid #ced4da !important;
+  border-radius: 4px !important;
+}
+
+/* Table rows */
+#changelist table {
+  background: #ffffff !important;
+}
+#changelist table thead th {
+  background: #f8f9fa !important;
+  color: #212529 !important;
+  border-bottom: 2px solid #dee2e6 !important;
+}
+#changelist table tbody tr {
+  background: #ffffff !important;
+  color: #212529 !important;
+}
+#changelist table tbody tr:nth-child(even) {
+  background: #f8f9fa !important;
+}
+#changelist table tbody tr:hover {
+  background: #e9ecef !important;
+}

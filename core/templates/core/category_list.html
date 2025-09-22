@@ -1,0 +1,40 @@
+{% extends "core/base.html" %}
+{% block title %}Danh sách chuyên mục{% endblock %}
+
+{% block content %}
+<div class="container">
+  <h1 style="margin-bottom:1.5rem;">📂 Danh sách chuyên mục</h1>
+
+  <a href="{% url 'category_create' %}" class="btn btn-primary" style="margin-bottom:1rem;">+ Thêm chuyên mục</a>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Tên</th>
+        <th>Slug</th>
+        <th>Mô tả</th>
+        <th>Hành động</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for cat in categories %}
+      <tr>
+        <td>{{ cat.id }}</td>
+        <td>{{ cat.name }}</td>
+        <td>{{ cat.slug }}</td>
+        <td>{{ cat.description|default:"-" }}</td>
+        <td>
+          <a href="{% url 'category_update' cat.id %}" class="btn btn-edit">Sửa</a>
+          <a href="{% url 'category_delete' cat.id %}" class="btn btn-delete">Xoá</a>
+        </td>
+      </tr>
+      {% empty %}
+      <tr>
+        <td colspan="5" style="text-align:center;">Chưa có chuyên mục nào.</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}
