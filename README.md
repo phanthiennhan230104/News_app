@@ -1,4 +1,4 @@
-#📰 News App – Hệ thống Tin tức Django
+📰 News App – Hệ thống Tin tức Django
 
 Ứng dụng web tin tức được xây dựng bằng Django + MySQL, hỗ trợ phân quyền người dùng: độc giả, người đăng tin, quản trị viên.
 
