@@ -2,7 +2,7 @@
 
 Ứng dụng web tin tức được xây dựng bằng Django + MySQL, hỗ trợ phân quyền người dùng: độc giả, người đăng tin, quản trị viên.
 
-##🚀 Tính năng chính
+## 🚀 Tính năng chính
 
 ✅ Đăng nhập / Đăng ký / Đăng xuất / Phân quyền
 
